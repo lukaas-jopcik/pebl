@@ -3,6 +3,23 @@
   "version": "0.1.0",
   "description": "Local-only AI Task Receipts for Claude Code and Codex CLI, backed by evidence, not guesses.",
   "license": "Apache-2.0",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "ai-agent",
+    "cli",
+    "receipts",
+    "verification"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukaas-jopcik/pebl.git",
+    "directory": "packages/pebl"
+  },
+  "homepage": "https://github.com/lukaas-jopcik/pebl/tree/main/packages/pebl#readme",
+  "bugs": {
+    "url": "https://github.com/lukaas-jopcik/pebl/issues"
+  },
   "type": "module",
   "engines": {
     "node": ">=20"

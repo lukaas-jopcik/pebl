@@ -1,5 +1,11 @@
 # Changelog: verified-ai-task-receipt
 
+## 1.1.0 — Status update (implementation complete, unvalidated)
+
+All 10 IMPL phases (47 tasks) implemented: Claude Code + Codex adapters, local event log + SQLite index, deterministic classifier, the full Verification Join (files-touched, git-watch, test detection, check runner, revert recheck), receipt rendering + insight gate, the complete CLI surface (`setup`/`hook`/`receipt`/`recheck`/`rebuild-index`/`doctor`/`uninstall`/`eval`), and cross-platform scheduler support. 210+ tests, all real integration tests against real git repos/hook payloads, no mocked git calls. Verified end-to-end multiple times against the built binary, not just unit tests.
+
+Status set to "Built — pending real-world validation" rather than "Implemented": the actual product claim (Verification Join precision, SM-1) is unvalidated — there's no historical usage to evaluate against yet, and the Phase 5→6 go/no-go gate was consequently never honored (documented explicitly in IMPL §6, not silently skipped). `npm publish` is separately blocked on the unscoped name `pebl` already being taken on the registry.
+
 ## 1.1.0 — Draft
 
 Resolved all three open questions and the forking dependency spike:
