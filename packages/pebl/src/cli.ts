@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import { Command } from 'commander';
 import { runClaudeCodeHook } from './hooks/claude-code-entrypoint.js';
 import { runCodexHook } from './hooks/codex-entrypoint.js';
@@ -11,12 +12,17 @@ import { runDoctorCommand } from './commands/doctor.js';
 import { runUninstallCommand } from './commands/uninstall.js';
 import { runEvalCommand } from './commands/eval.js';
 
+// Read from package.json at runtime so `--version` can never drift from what's
+// actually published — a hardcoded string here previously kept reporting
+// 0.1.0 after real releases moved on.
+const { version } = createRequire(import.meta.url)('../package.json') as { version: string };
+
 const program = new Command();
 
 program
   .name('pebl')
   .description('Local-only AI Task Receipts for Claude Code and Codex CLI.')
-  .version('0.1.0');
+  .version(version);
 
 program
   .command('hook <agent> <event>')
