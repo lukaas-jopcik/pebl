@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">Pebl — Every prompt. A better you.</title>
+  <desc id="desc">Dark Pebl brand banner with stacked pebble icon and product promise.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="0.55" stop-color="#0b1224"/>
+      <stop offset="1" stop-color="#111529"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9b6cff"/>
+      <stop offset="1" stop-color="#6f46ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#55b7ff"/>
+      <stop offset="1" stop-color="#397dff"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6fe2cf"/>
+      <stop offset="1" stop-color="#36bca7"/>
+    </linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1400" height="560" rx="36" fill="url(#bg)"/>
+  <circle cx="1120" cy="90" r="250" fill="#7c5cff" opacity="0.08"/>
+  <circle cx="1220" cy="490" r="300" fill="#37bfa9" opacity="0.06"/>
+  <g transform="translate(135 122)" filter="url(#glow)">
+    <ellipse cx="92" cy="240" rx="92" ry="38" fill="#f2ede5"/>
+    <ellipse cx="92" cy="165" rx="67" ry="31" fill="url(#blue)"/>
+    <ellipse cx="92" cy="98" rx="43" ry="25" fill="url(#violet)"/>
+  </g>
+  <g transform="translate(390 120)">
+    <text x="0" y="105" fill="#f8f6f2" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="116" font-weight="700" letter-spacing="-7">pebl</text>
+    <text x="2" y="184" fill="#f8f6f2" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="38" font-weight="600">Every prompt.</text>
+    <text x="258" y="184" fill="url(#violet)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="38" font-weight="700">A better you.</text>
+    <text x="2" y="246" fill="#aab4c6" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="24">The performance layer for people working with AI agents.</text>
+    <g transform="translate(2 302)">
+      <rect width="254" height="52" rx="26" fill="#151d31" stroke="#32405f"/>
+      <circle cx="27" cy="26" r="6" fill="#62d9bd"/>
+      <text x="45" y="34" fill="#dfe6f2" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="600">AI Collaboration Intelligence</text>
+    </g>
+    <g transform="translate(278 302)">
+      <rect width="176" height="52" rx="26" fill="#151d31" stroke="#32405f"/>
+      <text x="26" y="34" fill="#dfe6f2" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="600">Open source first</text>
+    </g>
+  </g>
+  <text x="1188" y="514" text-anchor="end" fill="#68748b" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="18">bepebl.com</text>
+</svg>
