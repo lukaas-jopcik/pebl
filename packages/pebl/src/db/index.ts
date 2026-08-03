@@ -12,12 +12,18 @@ import type { PeblEvent } from '../events/schema.js';
  * docs/02-engineering/event-model.md ("derived analytics can be rebuilt
  * from the event stream") and PRD OQ-1.
  */
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 const SCHEMA_SQL = `
 CREATE TABLE IF NOT EXISTS schema_meta (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS projects (
+  project_id TEXT PRIMARY KEY,
+  root_path TEXT NOT NULL,
+  updated_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
@@ -82,6 +88,7 @@ CREATE INDEX IF NOT EXISTS idx_verification_checks_commit ON verification_checks
 `;
 
 const TRUNCATE_SQL = `
+DELETE FROM projects;
 DELETE FROM sessions;
 DELETE FROM interactions;
 DELETE FROM tool_events;
@@ -132,17 +139,34 @@ export async function rebuildIndex(db: Database.Database): Promise<void> {
   }
 }
 
+export interface ReplayStatements {
+  insertProject: Database.Statement;
+  insertSession: Database.Statement;
+  touchSessionEnd: Database.Statement;
+  insertToolEvent: Database.Statement;
+}
+
+export function prepareReplayStatements(db: Database.Database): ReplayStatements {
+  return {
+    insertProject: db.prepare(
+      `INSERT INTO projects (project_id, root_path, updated_at) VALUES (@project_id, @root_path, @updated_at)
+       ON CONFLICT(project_id) DO UPDATE SET root_path = excluded.root_path, updated_at = excluded.updated_at`,
+    ),
+    insertSession: db.prepare(
+      `INSERT INTO sessions (session_id, source, project_id, started_at, ended_at)
+       VALUES (@session_id, @source, @project_id, @started_at, @ended_at)
+       ON CONFLICT(session_id) DO UPDATE SET ended_at = excluded.ended_at`,
+    ),
+    touchSessionEnd: db.prepare(`UPDATE sessions SET ended_at = ? WHERE session_id = ?`),
+    insertToolEvent: db.prepare(
+      `INSERT INTO tool_events (interaction_id, session_id, tool_name, event_type, success, duration_ms, timestamp)
+       VALUES (@interaction_id, @session_id, @tool_name, @event_type, @success, @duration_ms, @timestamp)`,
+    ),
+  };
+}
+
 async function replayProject(db: Database.Database, projectId: string): Promise<void> {
-  const insertSession = db.prepare(
-    `INSERT INTO sessions (session_id, source, project_id, started_at, ended_at)
-     VALUES (@session_id, @source, @project_id, @started_at, @ended_at)
-     ON CONFLICT(session_id) DO UPDATE SET ended_at = excluded.ended_at`,
-  );
-  const touchSessionEnd = db.prepare(`UPDATE sessions SET ended_at = ? WHERE session_id = ?`);
-  const insertToolEvent = db.prepare(
-    `INSERT INTO tool_events (interaction_id, session_id, tool_name, event_type, success, duration_ms, timestamp)
-     VALUES (@interaction_id, @session_id, @tool_name, @event_type, @success, @duration_ms, @timestamp)`,
-  );
+  const stmts = prepareReplayStatements(db);
 
   // better-sqlite3 is synchronous; readEvents() is an async generator over
   // file I/O. We await each event and then perform a synchronous insert —
@@ -151,19 +175,22 @@ async function replayProject(db: Database.Database, projectId: string): Promise<
   // could be wrapped in db.transaction() for speed once real volumes matter;
   // deferred until Phase 5/9 profiling shows it's needed.
   for await (const event of readEvents(projectId)) {
-    applyEvent(event, { insertSession, touchSessionEnd, insertToolEvent });
+    applyEvent(event, stmts);
   }
-}
-
-interface ReplayStatements {
-  insertSession: Database.Statement;
-  touchSessionEnd: Database.Statement;
-  insertToolEvent: Database.Statement;
 }
 
 const TOOL_EVENT_TYPES = new Set(['PreToolUse', 'PostToolUse', 'PostToolUseFailure']);
 
-function applyEvent(event: PeblEvent, stmts: ReplayStatements): void {
+export function applyEvent(event: PeblEvent, stmts: ReplayStatements): void {
+  const cwd = event.payload.cwd;
+  if (typeof cwd === 'string' && cwd.length > 0) {
+    stmts.insertProject.run({
+      project_id: event.project_id,
+      root_path: cwd,
+      updated_at: event.timestamp,
+    });
+  }
+
   if (event.event_type === 'SessionStart') {
     stmts.insertSession.run({
       session_id: event.session_id,
@@ -193,10 +220,27 @@ function applyEvent(event: PeblEvent, stmts: ReplayStatements): void {
     });
   }
 
-  // Interaction rows (prompt text, meaningful classification, files_touched,
-  // commits, verification_checks) are populated by Phase 2/3 adapters,
-  // Phase 4's classifier, and Phase 5's Verification Join respectively —
-  // all of which write through appendEvent()/this same replay path, not a
-  // separate write path, so `pebl rebuild-index` always reconstructs full
-  // state from the log alone.
+  // Interaction rows (prompt text, meaningful classification), files_touched,
+  // and commits/verification_checks are populated by Phase 4's classifier and
+  // Phase 5's Verification Join respectively, invoked from the hook
+  // entrypoints (src/hooks/*-entrypoint.ts) rather than from this replay
+  // loop — they depend on live filesystem/git state (test detection, commit
+  // matching) that only makes sense to (re)compute at the moment a hook
+  // actually fires, not when replaying historical events out of order.
+}
+
+/**
+ * Incrementally indexes a single freshly-appended event without a full
+ * rebuild — used by the hook entrypoints so every `pebl hook` invocation
+ * stays cheap (one event, not a full log replay).
+ */
+export function indexSingleEvent(db: Database.Database, event: PeblEvent): void {
+  applyEvent(event, prepareReplayStatements(db));
+}
+
+export function getProjectRootPath(db: Database.Database, projectId: string): string | undefined {
+  const row = db.prepare('SELECT root_path FROM projects WHERE project_id = ?').get(projectId) as
+    | { root_path: string }
+    | undefined;
+  return row?.root_path;
 }

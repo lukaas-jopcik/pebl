@@ -1,7 +1,14 @@
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type Database from 'better-sqlite3';
-import { ensureIndexUpToDate, openDb, rebuildIndex, SCHEMA_VERSION } from '../src/db/index.js';
+import {
+  ensureIndexUpToDate,
+  getProjectRootPath,
+  indexSingleEvent,
+  openDb,
+  rebuildIndex,
+  SCHEMA_VERSION,
+} from '../src/db/index.js';
 import { appendEvent } from '../src/events/store.js';
 import { makeEvent } from './helpers/fixtures.js';
 import { useTempPeblHome } from './helpers/tmp-home.js';
@@ -119,5 +126,49 @@ describe('index rebuild', () => {
     await ensureIndexUpToDate(db);
     const afterSecond = db.prepare('SELECT COUNT(*) AS n FROM sessions').get() as { n: number };
     expect(afterSecond.n).toBe(1);
+  });
+
+  it('records the project root path from any event carrying a cwd field', async () => {
+    appendEvent(
+      makeEvent({
+        project_id: 'proj-cwd',
+        session_id: 'sess-6',
+        event_type: 'SessionStart',
+        payload: { cwd: '/tmp/some-project' },
+      }),
+    );
+
+    await rebuildIndex(db);
+    expect(getProjectRootPath(db, 'proj-cwd')).toBe('/tmp/some-project');
+  });
+
+  it('updates the recorded root path when a later event reports a different cwd', async () => {
+    appendEvent(
+      makeEvent({ project_id: 'proj-moved', session_id: 'sess-7', payload: { cwd: '/old/path' } }),
+    );
+    appendEvent(
+      makeEvent({ project_id: 'proj-moved', session_id: 'sess-7', payload: { cwd: '/new/path' } }),
+    );
+
+    await rebuildIndex(db);
+    expect(getProjectRootPath(db, 'proj-moved')).toBe('/new/path');
+  });
+});
+
+describe('indexSingleEvent', () => {
+  it('incrementally indexes one event without requiring a full rebuild', () => {
+    indexSingleEvent(
+      db,
+      makeEvent({
+        project_id: 'proj-incremental',
+        session_id: 'sess-8',
+        event_type: 'SessionStart',
+        payload: { cwd: '/tmp/incremental-project' },
+      }),
+    );
+
+    const session = db.prepare('SELECT * FROM sessions WHERE session_id = ?').get('sess-8');
+    expect(session).toBeDefined();
+    expect(getProjectRootPath(db, 'proj-incremental')).toBe('/tmp/incremental-project');
   });
 });
