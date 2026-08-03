@@ -5,6 +5,7 @@ import {
   unregisterHookConfig,
 } from '../../hooks/hook-config-file.js';
 import { codexHome } from './rollout.js';
+import { peblBinPath } from '../../bin-path.js';
 import type { CanonicalEventType } from '../../events/schema.js';
 
 /**
@@ -48,12 +49,15 @@ export function hooksConfigPath(scope: HookScope, cwd: string): string {
     : join(cwd, '.codex', 'hooks.json');
 }
 
+// See claude-code/hooks.ts commandFor for why this is an absolute path.
 function commandFor(event: CanonicalEventType): string {
-  return `pebl hook codex ${event}`;
+  return `${peblBinPath()} hook codex ${event}`;
 }
 
+// See claude-code/hooks.ts isOwnHookCommand for why this matches on the
+// subcommand shape rather than a "pebl" substring.
 function isOwnHookCommand(command: string): boolean {
-  return command.startsWith('pebl hook codex ');
+  return command.includes('hook codex ');
 }
 
 export function registerHooks(scope: HookScope, cwd: string): { path: string; changed: boolean } {

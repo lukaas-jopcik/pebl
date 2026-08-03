@@ -5,6 +5,7 @@ import {
   registerHookConfig,
   unregisterHookConfig,
 } from '../../hooks/hook-config-file.js';
+import { peblBinPath } from '../../bin-path.js';
 import type { CanonicalEventType } from '../../events/schema.js';
 
 /** The eight Claude Code events this package needs, per PRD FR-1. */
@@ -46,17 +47,25 @@ export function settingsPath(scope: HookScope, cwd: string): string {
 }
 
 /**
- * `pebl` is expected to be resolvable on PATH by the time an agent invokes
- * a hook — hook registration only makes sense for a persistent global (or
- * project devDependency) install, never for a one-off `npx pebl` run, so a
- * bare command name (not an absolute path to this process) is correct here.
+ * We write the absolute path to the currently-running `pebl` binary rather
+ * than a bare command name: hook runners are not guaranteed to inherit the
+ * PATH of the interactive shell that ran `pebl setup` (observed in practice
+ * with at least one real Claude Code hook runner), and an absolute path has
+ * no PATH dependency to break.
  */
 function commandFor(event: CanonicalEventType): string {
-  return `pebl hook claude-code ${event}`;
+  return `${peblBinPath()} hook claude-code ${event}`;
 }
 
+/**
+ * Matches on the subcommand shape, not a "pebl" substring: `commandFor`
+ * prefixes this with an absolute path to the running binary, which has no
+ * fixed relationship to the string "pebl" (a renamed binary, or the test
+ * runner's own process path when these functions are called in-process
+ * from tests, would otherwise defeat a substring check on "pebl").
+ */
 function isOwnHookCommand(command: string): boolean {
-  return command.startsWith('pebl hook claude-code ');
+  return command.includes('hook claude-code ');
 }
 
 /**

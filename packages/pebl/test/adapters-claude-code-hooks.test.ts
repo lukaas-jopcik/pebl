@@ -97,7 +97,7 @@ describe('claude-code hook registration (project scope)', () => {
     ).toBe(true);
     expect(
       postToolUseEntries.some((entry: { hooks: { command: string }[] }) =>
-        entry.hooks.some((h) => h.command.startsWith('pebl hook claude-code')),
+        entry.hooks.some((h) => h.command.includes('hook claude-code')),
       ),
     ).toBe(true);
   });
