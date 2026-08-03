@@ -11,6 +11,7 @@ This directory is the canonical source of truth for Pebl.
 ## Product
 
 - [Canonical PRD](01-product/canonical-prd.md)
+- [MVP Wedge: Verified AI Task Receipt](01-product/mvp-wedge-verified-receipt.md)
 - [AI Task Receipt](01-product/ai-task-receipt.md)
 - [Daily AI Performance Report](01-product/daily-report.md)
 
