@@ -20,6 +20,32 @@ afterEach(() => {
   rmSync(projectDir, { recursive: true, force: true });
 });
 
+describe('claude-code hook registration (global scope honors CLAUDE_CONFIG_DIR)', () => {
+  let configDir: string;
+  let originalEnv: string | undefined;
+
+  beforeEach(() => {
+    configDir = mkdtempSync(join(tmpdir(), 'pebl-claude-config-'));
+    originalEnv = process.env.CLAUDE_CONFIG_DIR;
+    process.env.CLAUDE_CONFIG_DIR = configDir;
+  });
+
+  afterEach(() => {
+    if (originalEnv === undefined) delete process.env.CLAUDE_CONFIG_DIR;
+    else process.env.CLAUDE_CONFIG_DIR = originalEnv;
+    rmSync(configDir, { recursive: true, force: true });
+  });
+
+  it('registers into $CLAUDE_CONFIG_DIR/settings.json, not ~/.claude/settings.json', () => {
+    const path = settingsPath('global', projectDir);
+    expect(path).toBe(join(configDir, 'settings.json'));
+
+    const { changed } = registerHooks('global', projectDir);
+    expect(changed).toBe(true);
+    expect(registeredEvents('global', projectDir).sort()).toEqual([...MANAGED_EVENTS].sort());
+  });
+});
+
 describe('claude-code hook registration (project scope)', () => {
   it('creates .claude/settings.json with all managed events on first run', () => {
     const { changed } = registerHooks('project', projectDir);

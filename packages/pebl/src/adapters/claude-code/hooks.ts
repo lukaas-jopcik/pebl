@@ -29,9 +29,19 @@ const TOOL_SCOPED_EVENTS = new Set<CanonicalEventType>([
 
 export type HookScope = 'global' | 'project';
 
+/**
+ * Claude Code itself honors `CLAUDE_CONFIG_DIR` to relocate its entire config
+ * directory (settings, plugins, etc.) away from `~/.claude`. We must resolve
+ * the global settings path the same way, or hook registration silently
+ * targets a file the running agent never reads.
+ */
+function globalClaudeConfigDir(): string {
+  return process.env.CLAUDE_CONFIG_DIR ?? join(homedir(), '.claude');
+}
+
 export function settingsPath(scope: HookScope, cwd: string): string {
   return scope === 'global'
-    ? join(homedir(), '.claude', 'settings.json')
+    ? join(globalClaudeConfigDir(), 'settings.json')
     : join(cwd, '.claude', 'settings.json');
 }
 
