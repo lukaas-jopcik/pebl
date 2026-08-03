@@ -1,0 +1,8 @@
+{
+  "session_id": "cc-session-abc123",
+  "hook_event_name": "PostToolUse",
+  "prompt_id": "prompt-1",
+  "cwd": "/tmp/example-project",
+  "tool_name": "Edit",
+  "duration_ms": 340
+}

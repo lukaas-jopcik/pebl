@@ -1,0 +1,8 @@
+{
+  "session_id": "cc-session-abc123",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt_id": "prompt-1",
+  "cwd": "/tmp/example-project",
+  "permission_mode": "default",
+  "user_prompt": "Add rate limiting to the auth endpoint, must include a test."
+}

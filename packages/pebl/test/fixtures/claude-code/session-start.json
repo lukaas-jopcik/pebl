@@ -1,0 +1,6 @@
+{
+  "session_id": "cc-session-abc123",
+  "hook_event_name": "SessionStart",
+  "cwd": "/tmp/example-project",
+  "permission_mode": "default"
+}

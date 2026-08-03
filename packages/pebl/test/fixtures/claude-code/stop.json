@@ -1,0 +1,7 @@
+{
+  "session_id": "cc-session-abc123",
+  "hook_event_name": "Stop",
+  "prompt_id": "prompt-1",
+  "cwd": "/tmp/example-project",
+  "last_assistant_message": "Added rate limiting middleware and a passing test for the 429 response."
+}

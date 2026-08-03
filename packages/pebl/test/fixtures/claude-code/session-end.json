@@ -1,0 +1,6 @@
+{
+  "session_id": "cc-session-abc123",
+  "hook_event_name": "SessionEnd",
+  "cwd": "/tmp/example-project",
+  "end_reason": "user_exit"
+}
