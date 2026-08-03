@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">Pebl logo concept</title>
+  <desc id="desc">Three rounded pebbles with the Pebl wordmark.</desc>
+  <defs>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9A6BFF"/>
+      <stop offset="1" stop-color="#6847FF"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#55B9FF"/>
+      <stop offset="1" stop-color="#3578FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="220" rx="32" fill="#090E1A"/>
+  <ellipse cx="105" cy="163" rx="65" ry="31" fill="#F2EDE5"/>
+  <ellipse cx="105" cy="110" rx="48" ry="25" fill="url(#mid)"/>
+  <ellipse cx="105" cy="66" rx="32" ry="20" fill="url(#top)"/>
+  <text x="205" y="142" fill="#F7F3EC" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="650" letter-spacing="-6">pebl</text>
+</svg>
