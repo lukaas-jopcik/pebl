@@ -1,6 +1,6 @@
-# pebl
+# bepebl
 
-Local-only AI Task Receipts for Claude Code and Codex CLI.
+Local-only AI Task Receipts for Claude Code and Codex CLI. Installs as the npm package `bepebl`; the command you run is `pebl`.
 
 After a meaningful AI coding task, `pebl` tells you whether it actually held up — with evidence (a git commit, a real test/build run, and a revert check), not a guess. This is the [Verified AI Task Receipt](../../docs/01-product/mvp-wedge-verified-receipt.md) wedge of the larger [Pebl](../../README.md) project.
 
@@ -18,7 +18,7 @@ Functional, dogfooded manually against real hook payloads and real git repos, bu
 ## Install
 
 ```bash
-npm install -g pebl
+npm install -g bepebl
 ```
 
 (Not yet published. Until then, build from source: `npm install && npm run build` in this directory, then `npm link`.)

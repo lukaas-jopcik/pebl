@@ -2,7 +2,7 @@
 
 **Feature**: `verified-ai-task-receipt`
 **Version**: 1.1.0
-**Status**: Built — pending real-world validation. Every functional requirement (FR-1–FR-16) is implemented and covered by real integration tests (real disposable git repos, real hook payloads, real test runs — not mocked). Deliberately **not** marked "Implemented" in the usual sense: SM-1 (Verification Join precision on 200 real sessions) has not run and cannot yet, because no historical usage exists in the implementation environment (see [IMPL §6](../../impl/verified-ai-task-receipt/IMPL.md#6-gate-before-phase-6-explicit-gono-go)). `npm publish` is additionally blocked on a name collision — the unscoped npm name `pebl` is already taken by an unrelated package (see `packages/pebl/CHANGELOG.md`).
+**Status**: Built — pending real-world validation. Every functional requirement (FR-1–FR-16) is implemented and covered by real integration tests (real disposable git repos, real hook payloads, real test runs — not mocked). Deliberately **not** marked "Implemented" in the usual sense: SM-1 (Verification Join precision on 200 real sessions) has not run and cannot yet, because no historical usage exists in the implementation environment (see [IMPL §6](../../impl/verified-ai-task-receipt/IMPL.md#6-gate-before-phase-6-explicit-gono-go)). The npm publish naming collision (unscoped `pebl` taken) is resolved — published as `bepebl` (CLI command stays `pebl`); see `packages/pebl/CHANGELOG.md`.
 **Owner**: Lukas Jopcik
 **Supersedes (for v1 shipping scope only)**: [Canonical PRD §5 MVP scope](../../01-product/canonical-prd.md#5-mvp-scope)
 **Detailed spec**: [MVP Wedge: Verified AI Task Receipt](../../01-product/mvp-wedge-verified-receipt.md)
