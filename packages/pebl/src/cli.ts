@@ -9,6 +9,7 @@ import { runRecheckCommand } from './commands/recheck.js';
 import { runRebuildIndexCommand } from './commands/rebuild-index.js';
 import { runDoctorCommand } from './commands/doctor.js';
 import { runUninstallCommand } from './commands/uninstall.js';
+import { runEvalCommand } from './commands/eval.js';
 
 const program = new Command();
 
@@ -115,6 +116,19 @@ program
       cwd: process.cwd(),
       purgeData: opts.purgeData,
     });
+  });
+
+program
+  .command('eval', { hidden: true })
+  .description('Internal: emits a CSV of past sessions and their Verification Join calls for manual spot-check (SM-1).')
+  .option('--sessions <n>', 'how many recent sessions to include', '200')
+  .action(async (opts: { sessions: string }) => {
+    const context = await createContext();
+    try {
+      await runEvalCommand(context, { sessionLimit: Number.parseInt(opts.sessions, 10) });
+    } finally {
+      context.db.close();
+    }
   });
 
 program.parseAsync(process.argv);
