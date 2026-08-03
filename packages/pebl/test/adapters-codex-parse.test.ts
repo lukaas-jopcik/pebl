@@ -32,7 +32,7 @@ describe('codex parse', () => {
     expect(event.privacy_class).toBe('user_content');
     expect(event.turn_id).toBe('turn-1');
     expect(event.prompt_id).toBeUndefined();
-    expect(event.payload.user_prompt).toMatch(/Refactor the pricing/);
+    expect(event.payload.prompt).toMatch(/Refactor the pricing/);
   });
 
   it('classifies PostToolUse as metadata-only', () => {

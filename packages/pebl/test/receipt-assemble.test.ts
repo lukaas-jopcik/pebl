@@ -130,6 +130,38 @@ describe('assembleReceiptInput', () => {
 
     expect(input.frictionEvents).toEqual({ permissionDenials: 1, failedToolCalls: 1, retries: 0 });
   });
+
+  it('reads intent text from the Codex field name (prompt), not the Claude Code one (user_prompt)', async () => {
+    const projectId = 'proj-codex-intent';
+    const sessionId = 'sess-codex-intent';
+
+    appendEvent(
+      makeEvent({
+        project_id: projectId,
+        session_id: sessionId,
+        source: 'codex',
+        event_type: 'SessionStart',
+      }),
+    );
+    appendEvent(
+      makeEvent({
+        project_id: projectId,
+        session_id: sessionId,
+        source: 'codex',
+        event_type: 'UserPromptSubmit',
+        turn_id: 't1',
+        payload: { prompt: 'Refactor the pricing calculation.' },
+      }),
+    );
+    appendEvent(
+      makeEvent({ project_id: projectId, session_id: sessionId, source: 'codex', event_type: 'SessionEnd' }),
+    );
+
+    await rebuildIndex(db);
+    const input = await assembleReceiptInput(db, projectId, repo.dir, sessionId);
+
+    expect(input.intentText).toBe('Refactor the pricing calculation.');
+  });
 });
 
 describe('findLatestSessionId', () => {

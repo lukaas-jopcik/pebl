@@ -8,22 +8,21 @@ import { codexHome } from './rollout.js';
 import type { CanonicalEventType } from '../../events/schema.js';
 
 /**
- * ⚠️ UNVERIFIED ASSUMPTION — resolve before relying on this in real use.
+ * Verified (2026-08-03) against https://learn.chatgpt.com/docs/hooks:
+ * Codex discovers hooks at `~/.codex/hooks.json` (global) or
+ * `<repo>/.codex/hooks.json` (project-local) — both scopes supported,
+ * matching this module's `hooksConfigPath()`. The documented shape is
+ * exactly `{ hooks: { EventName: [{ matcher?, hooks: [{ type: "command",
+ * command }] }] } }`, matching `hooks/hook-config-file.ts`'s
+ * `HookConfigFile`/`HookMatcherEntry`/`HookCommand` types. The docs
+ * explicitly confirm `matcher: "*"` (used here for tool-scoped events)
+ * as the documented way to match all occurrences, not an assumption
+ * about regex wildcard behavior.
  *
- * Codex's on-disk hook-registration file format/location is modeled here
- * on Claude Code's `.claude/settings.json` (same JSON shape: {matcher?,
- * hooks: [{type, command}]}, mirrored under CODEX_HOME instead of
- * ~/.claude), because PRD §11's technical-feasibility research found
- * Codex's hook *payload* shape "deliberately near-isomorphic" to Claude
- * Code's — but that research verified Codex's *hook event names and
- * payload fields* against https://learn.chatgpt.com/docs/hooks, not the
- * exact on-disk config file this module writes to register them.
- *
- * Before this adapter is used against a real Codex CLI install, verify
- * the actual config file name/path/shape against current Codex hooks
- * documentation and correct hooksConfigPath()/commandFor() below — every
- * other module in this adapter (parse.ts, rollout.ts) is independent of
- * this file's correctness.
+ * Not implemented: Codex also accepts an equivalent TOML block under
+ * `~/.codex/config.toml` / `<repo>/.codex/config.toml`. This module only
+ * writes the JSON form — sufficient per the docs, since both scopes are
+ * documented to be read independently, not merged from one format only.
  */
 export const MANAGED_EVENTS: CanonicalEventType[] = [
   'SessionStart',

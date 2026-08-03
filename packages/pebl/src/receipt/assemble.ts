@@ -44,8 +44,12 @@ export async function assembleReceiptInput(
   const sessionEnd = allEvents.find((e) => e.event_type === 'SessionEnd' || e.event_type === 'Stop')
     ?.timestamp;
   const firstPrompt = allEvents.find((e) => e.event_type === 'UserPromptSubmit');
-  const intentText =
-    typeof firstPrompt?.payload.user_prompt === 'string' ? firstPrompt.payload.user_prompt : undefined;
+  // Claude Code's prompt-text field is `user_prompt`; Codex's is `prompt`
+  // (verified against https://learn.chatgpt.com/docs/hooks — the two
+  // adapters do not share a field name here, so both must be checked).
+  const rawIntentText =
+    firstPrompt?.payload.user_prompt ?? firstPrompt?.payload.prompt;
+  const intentText = typeof rawIntentText === 'string' ? rawIntentText : undefined;
 
   const toolCallCount = allEvents.filter((e) => TOOL_CALL_EVENT_TYPES.has(e.event_type)).length;
   const permissionDenials = allEvents.filter((e) => e.event_type === 'PermissionDenied').length;

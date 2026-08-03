@@ -3,5 +3,5 @@
   "hook_event_name": "UserPromptSubmit",
   "turn_id": "turn-1",
   "cwd": "/tmp/example-codex-project",
-  "user_prompt": "Refactor the pricing calculation, keep the existing test suite green."
+  "prompt": "Refactor the pricing calculation, keep the existing test suite green."
 }

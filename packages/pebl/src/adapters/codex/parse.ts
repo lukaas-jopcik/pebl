@@ -3,11 +3,14 @@ import { CODEX_EVENT_MAP, mapHookEventName } from '../canonical-events.js';
 import type { PeblEvent, PrivacyClass } from '../../events/schema.js';
 
 /**
- * Fields Codex is documented to pipe on every hook invocation (PRD §11):
- * session_id, transcript_path, cwd, hook_event_name, model, permission_mode
- * as common fields; turn_id, tool_name, tool_input as event-specific ones.
- * Field names for prompt/response text are modeled on Claude Code's
- * (user_prompt) pending live verification — same caveat as hooks.ts.
+ * Verified (2026-08-03) against https://learn.chatgpt.com/docs/hooks.
+ * Common fields on every hook invocation: session_id, transcript_path,
+ * cwd, model, permission_mode. Turn-scoped hooks add turn_id (a Codex-
+ * specific extension). The prompt text field on UserPromptSubmit is
+ * `prompt` — NOT `user_prompt` as originally assumed here (that guess
+ * was modeled on Claude Code's field name and was wrong; caught by
+ * checking the real docs rather than leaving the assumption in place).
+ * `last_assistant_message` on Stop was already correct.
  */
 export interface CodexHookPayload {
   session_id: string;
@@ -17,7 +20,7 @@ export interface CodexHookPayload {
   cwd?: string;
   model?: string;
   permission_mode?: string;
-  user_prompt?: string;
+  prompt?: string;
   tool_name?: string;
   tool_input?: unknown;
   last_assistant_message?: string;
@@ -27,7 +30,7 @@ export interface CodexHookPayload {
 }
 
 const ENVELOPE_FIELDS = new Set(['session_id', 'hook_event_name', 'turn_id']);
-const USER_CONTENT_FIELDS = ['user_prompt', 'last_assistant_message'];
+const USER_CONTENT_FIELDS = ['prompt', 'last_assistant_message'];
 
 function determinePrivacyClass(payload: Record<string, unknown>): PrivacyClass {
   return USER_CONTENT_FIELDS.some((field) => field in payload) ? 'user_content' : 'metadata';
