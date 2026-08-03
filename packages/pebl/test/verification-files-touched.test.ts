@@ -43,6 +43,56 @@ describe('filesTouched', () => {
     ];
     expect(filesTouched(events)).toEqual(new Set(['src/d.ts']));
   });
+
+  describe("Codex's apply_patch (V4A patch format, no structured file_path field)", () => {
+    it('extracts the path from an "Add File" section', () => {
+      const events = [
+        makeEvent({
+          event_type: 'PostToolUse',
+          payload: {
+            tool_input: {
+              command: ['apply_patch', '*** Begin Patch\n*** Add File: hello.txt\n+Hello, world!\n*** End Patch\n'],
+            },
+          },
+        }),
+      ];
+      expect(filesTouched(events)).toEqual(new Set(['hello.txt']));
+    });
+
+    it('extracts the path from an "Update File" section with a hunk', () => {
+      const patch =
+        '*** Begin Patch\n*** Update File: src/app.py\n@@ def greet():\n-print("Hi")\n+print("Hello, world!")\n*** End Patch\n';
+      const events = [
+        makeEvent({ event_type: 'PostToolUse', payload: { tool_input: { command: ['apply_patch', patch] } } }),
+      ];
+      expect(filesTouched(events)).toEqual(new Set(['src/app.py']));
+    });
+
+    it('extracts both the original and renamed path from an "Update File" + "Move to" pair', () => {
+      const patch =
+        '*** Begin Patch\n*** Update File: src/app.py\n*** Move to: src/main.py\n@@ def greet():\n-print("Hi")\n+print("Hello, world!")\n*** End Patch\n';
+      const events = [
+        makeEvent({ event_type: 'PostToolUse', payload: { tool_input: { command: ['apply_patch', patch] } } }),
+      ];
+      expect(filesTouched(events)).toEqual(new Set(['src/app.py', 'src/main.py']));
+    });
+
+    it('extracts every file touched across multiple sections in one patch', () => {
+      const patch =
+        '*** Begin Patch\n*** Add File: a.txt\n+a\n*** Delete File: b.txt\n*** Update File: c.txt\n@@\n-old\n+new\n*** End Patch\n';
+      const events = [
+        makeEvent({ event_type: 'PostToolUse', payload: { tool_input: { command: ['apply_patch', patch] } } }),
+      ];
+      expect(filesTouched(events)).toEqual(new Set(['a.txt', 'b.txt', 'c.txt']));
+    });
+
+    it('never fabricates a path for a non-apply_patch command array', () => {
+      const events = [
+        makeEvent({ event_type: 'PostToolUse', payload: { tool_input: { command: ['ls', '-la'] } } }),
+      ];
+      expect(filesTouched(events)).toEqual(new Set());
+    });
+  });
 });
 
 describe('filesTouchedByInteraction', () => {
