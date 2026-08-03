@@ -1,13 +1,14 @@
 <p align="center">
-  <img src="assets/brand/github-hero.svg" alt="Pebl — Every prompt. A better you." width="100%" />
+  <img src="assets/readme/hero.jpg" alt="Pebl — Every prompt. A better you." width="100%" />
 </p>
 
 <p align="center">
-  <strong>The performance layer for people working with AI agents.</strong>
+  <strong>AI Collaboration Intelligence for people working with AI agents.</strong>
 </p>
 
 <p align="center">
-  Pebl observes Human × AI collaboration, finds avoidable effort, and turns every meaningful interaction into a better next one.
+  Pebl observes how you work with AI, turns meaningful tasks into evidence-backed feedback,
+  and helps every next interaction become better.
 </p>
 
 <p align="center">
@@ -29,38 +30,22 @@
 
 ## AI gets feedback. You should too.
 
-AI tools can show token usage, cost, latency, and model performance. They rarely tell the person behind the prompt:
+AI tools measure their own performance. People rarely get equally useful feedback on how they collaborate with them.
 
-- why the agent needed three corrections;
-- which context was discovered repeatedly;
-- what caused avoidable work;
-- whether the result was actually verified;
-- what should change the next time;
-- whether collaboration quality is improving over time.
+Pebl answers the questions that current AI tooling usually misses:
 
-**Pebl closes that feedback loop.**
+- Why did this task need multiple corrections?
+- Which context was rediscovered?
+- What work was avoidable?
+- Was the result actually verified?
+- What should change next time?
+- Is collaboration quality improving?
 
-It does not try to replace Claude Code, Codex, Gemini CLI, Cursor, or the next AI workspace. Pebl sits across them as a neutral intelligence layer for the human operator.
+> **Every AI interaction should improve either the current result or the next interaction.**
 
-> **Product law:** Every AI interaction should improve either the current result or the next interaction.
-
----
-
-## The Pebl loop
-
-```text
-Your prompt
-    ↓
-AI agent works
-    ↓
-Pebl observes the path
-    ↓
-One evidence-backed insight
-    ↓
-Project and behavior memory improve
-    ↓
-Your next prompt gets better
-```
+<p align="center">
+  <img src="assets/readme/workflow.jpg" alt="How Pebl works" width="100%" />
+</p>
 
 No manual task creation. No forced workflow. No generic prompt-engineering lecture.
 
@@ -68,195 +53,142 @@ Pebl stays quiet until it has something useful to say.
 
 ---
 
-## The first product
+## What Pebl gives you
 
-The initial Pebl module is an **open-source, terminal-first AI Coach** for AI-native developers.
+<p align="center">
+  <img src="assets/readme/features.jpg" alt="Pebl product capabilities" width="100%" />
+</p>
 
-<table>
-<tr>
-<td width="50%" valign="top">
+The initial wedge is an **open-source, terminal-first AI Coach** for AI-native developers.
 
-### AI Task Receipt
+---
 
-After meaningful AI work, Pebl summarizes:
+## AI Task Receipts
 
-- the intended outcome;
-- what was actually delivered;
-- time, tools, retries, and available usage data;
-- repeated discovery or abandoned paths;
+Every meaningful AI task becomes a compact retrospective:
+
+- intent and outcome;
+- time, tokens, tools, and files where available;
 - verification evidence;
-- one high-confidence improvement.
+- retries and repeated discovery;
+- one high-confidence improvement;
+- a reusable project learning.
 
-</td>
-<td width="50%" valign="top">
+<p align="center">
+  <img src="assets/readme/task-receipt.jpg" alt="AI Task Receipt" width="100%" />
+</p>
 
-### Daily Performance Report
-
-At the end of the day, Pebl shows:
-
-- meaningful AI interactions;
-- first-pass and verification trends;
-- estimated avoidable effort;
-- habits that are becoming stronger;
-- recurring collaboration issues;
-- one recommendation for tomorrow.
-
-</td>
-</tr>
-</table>
-
-### Example receipt
-
-```text
-TASK COMPLETED
-Implement Google OAuth
-
-Outcome
-✓ Build passed
-✓ 18 tests passed
-
-Effort
-12m 48s · 184k tokens · 21 tool calls
-
-Main inefficiency
-The session strategy was not specified. The agent first
-implemented JWT sessions, then replaced them after discovering
-the existing Prisma adapter.
-
-Recommended improvement
-Include the existing authentication adapter and session strategy
-in the initial prompt.
-
-Confidence
-High — supported by two abandoned paths and repeated config reads.
-```
+The default experience surfaces one precise recommendation rather than a wall of generic advice.
 
 ---
 
-## Built for juniors, seniors, and teams
+## Daily AI Performance Report
 
-| User | Pebl value |
-|---|---|
-| **Junior developer** | Learns how to scope, constrain, and verify AI-assisted work. |
-| **Senior engineer** | Detects architecture drift, repeated discovery, weak verification, and avoidable complexity. |
-| **Technical founder** | Understands where AI time and tokens go, and which workflows produce reliable results. |
-| **Engineering team** | Turns individual agent sessions into reusable project intelligence and shared conventions. |
-| **Enterprise** | Gains governed, privacy-aware Human × AI collaboration intelligence without default source-code upload. |
+Pebl helps the user answer one practical question:
+
+> **Did I collaborate with AI better today?**
+
+<p align="center">
+  <img src="assets/readme/daily-report.jpg" alt="Daily AI Performance Report" width="100%" />
+</p>
+
+The report focuses on first-pass success, verification, clarity, avoidable effort, habits, and one recommendation for tomorrow.
 
 ---
 
-## Privacy is part of the architecture
+## AI Work Graph
 
-Pebl is designed to earn the trust of developers and security teams.
+Pebl connects tasks, projects, prompts, receipts, habits, memories, and improvements into a longitudinal Human × AI performance graph.
+
+<p align="center">
+  <img src="assets/readme/work-graph.jpg" alt="AI Work Graph" width="100%" />
+</p>
+
+Providers know what their model did. Pebl learns how the person, model, and project work together over time.
+
+---
+
+## Project Memory
+
+Useful interaction-level learnings become reusable project intelligence.
+
+<p align="center">
+  <img src="assets/readme/project-memory.jpg" alt="Project Memory" width="100%" />
+</p>
+
+Project Memory has three confidence layers:
+
+1. **Observed Facts** — detected automatically.
+2. **Suggested Learnings** — proposed for review.
+3. **Golden Rules** — explicitly approved and reusable.
+
+---
+
+## Privacy-first by design
+
+Pebl is built to earn the trust of developers and security teams.
+
+<p align="center">
+  <img src="assets/readme/privacy-architecture.jpg" alt="Privacy-first architecture" width="100%" />
+</p>
 
 ### Local Only
-
-Collection, redaction, history, and baseline analysis remain on the device. No account is required.
+Collection, redaction, history, and baseline analysis remain on the device.
 
 ### Hybrid
-
-Only user-approved metadata is synchronized for managed analysis, long-term progress, and cross-device reporting.
+Only user-approved metadata is synchronized for managed analysis and cross-device history.
 
 ### Enterprise
+Configurable retention, data residency, private endpoints, and future self-hosted deployment.
 
-Configurable retention, data residency, private endpoints, customer-managed controls, and future self-hosted deployment.
-
-**Source code and full prompts are not uploaded by default.** The collection layer is open source so users can inspect what leaves their machine.
+**Source code and full prompts are not uploaded by default.**
 
 ---
 
-## Provider-independent by design
+## Bring Your Own Intelligence
 
-Pebl follows a **Bring Your Own Intelligence** model.
+Pebl is provider-independent.
+
+<p align="center">
+  <img src="assets/readme/providers.jpg" alt="Bring Your Own Intelligence" width="100%" />
+</p>
 
 Planned analysis options include:
 
 - Pebl managed cloud;
-- Anthropic API;
-- OpenAI API;
-- Gemini API;
+- Anthropic;
+- OpenAI;
+- Gemini;
 - OpenRouter;
 - LiteLLM;
-- Ollama and LM Studio;
+- Ollama and local models;
 - enterprise OpenAI-compatible endpoints.
 
-Consumer subscriptions are supported only when providers expose an authorized and documented integration path. Pebl will not bypass provider billing or imitate private user sessions.
-
----
-
-## Product architecture
-
-```mermaid
-flowchart LR
-    A[AI CLI adapter] --> B[Local event collector]
-    B --> C[Redaction and classification]
-    C --> D[Local event store]
-    D --> E[Receipt builder]
-    E --> F[Coach engine]
-    F --> G[Terminal or desktop UI]
-    F --> H[Optional cloud sync]
-    H --> I[Reports and team intelligence]
-```
-
-The first implementation target is **Claude Code**, followed by **Codex CLI** and **Gemini CLI**.
+Consumer subscriptions are supported only when the provider exposes an authorized and documented integration path.
 
 ---
 
 ## Roadmap
 
-<table>
-<tr>
-<td width="25%" valign="top">
+<p align="center">
+  <img src="assets/readme/roadmap.jpg" alt="Pebl roadmap" width="100%" />
+</p>
 
-### 01 — Validate
+| Stage | Focus |
+|---|---|
+| **MVP** | Claude Code integration, local event collector, receipts, daily report |
+| **Personal** | Behavior Memory, AI Work Graph, managed analysis |
+| **Project** | Project Memory, reusable rules, multi-provider support |
+| **Teams** | Shared intelligence, project playbooks, policies |
+| **Enterprise** | SSO, audit, data residency, private deployment |
 
-- Claude Code integration research
-- automatic interaction detection
-- 100 manually reviewed receipts
-- usefulness and interruption testing
-
-</td>
-<td width="25%" valign="top">
-
-### 02 — Personal
-
-- local collector
-- AI Task Receipts
-- daily reports
-- Behavior Memory
-- AI Work Graph
-
-</td>
-<td width="25%" valign="top">
-
-### 03 — Project
-
-- Project Memory
-- reusable rules
-- shared conventions
-- multi-provider support
-
-</td>
-<td width="25%" valign="top">
-
-### 04 — Teams
-
-- Team Intelligence
-- enterprise policies
-- private deployment
-- ecosystem and plugins
-
-</td>
-</tr>
-</table>
-
-Follow the implementation work in [GitHub Issues](https://github.com/lukaas-jopcik/pebl/issues).
+Follow active implementation work in [GitHub Issues](https://github.com/lukaas-jopcik/pebl/issues).
 
 ---
 
 ## Pebl Bible
 
-The repository is the canonical source of truth for the company and product.
+This repository is the canonical source of truth for the company and product.
 
 | Area | Documents |
 |---|---|
@@ -274,22 +206,10 @@ The repository is the canonical source of truth for the company and product.
 
 Pebl is open-source first because the collection and privacy boundary must be inspectable.
 
-Early contribution areas:
-
-- AI CLI adapters;
-- local event collection;
-- prompt classification;
-- terminal UX;
-- redaction and anonymization;
-- receipt evaluation;
-- provider integrations.
+Early contribution areas include AI CLI adapters, local event collection, prompt classification, redaction, receipt evaluation, provider integrations, and terminal UX.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
----
-
 <p align="center">
-  <strong>Every prompt. A better you.</strong>
-  <br />
-  <sub>Pebl · AI Collaboration Intelligence · bepebl.com</sub>
+  <img src="assets/readme/closing-banner.jpg" alt="Every prompt. A better you." width="100%" />
 </p>

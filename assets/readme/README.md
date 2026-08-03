@@ -1,8 +1,6 @@
 # Pebl README assets
 
-This directory is reserved for the approved visual system used by the repository landing page.
-
-Expected assets:
+These files are the approved visual system for the GitHub repository.
 
 - `hero.jpg`
 - `workflow.jpg`
@@ -16,4 +14,4 @@ Expected assets:
 - `roadmap.jpg`
 - `closing-banner.jpg`
 
-All visuals follow the canonical Pebl direction: calm navy, cream, violet and blue; restrained gradients; rounded UI; high readability; and minimal decorative clutter.
+All assets use the canonical Pebl visual direction: calm navy, cream, violet, blue, restrained gradients, rounded UI, and clear typography.
