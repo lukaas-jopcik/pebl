@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/hero.jpg" alt="Pebl — Every prompt. A better you." width="100%" />
+  <img src="assets/readme/retina-2x-png/hero.png" alt="Pebl — Every prompt. A better you." width="100%" />
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@ Pebl answers the questions that current AI tooling usually misses:
 > **Every AI interaction should improve either the current result or the next interaction.**
 
 <p align="center">
-  <img src="assets/readme/workflow.jpg" alt="How Pebl works" width="100%" />
+  <img src="assets/readme/retina-2x-png/workflow.png" alt="How Pebl works" width="100%" />
 </p>
 
 No manual task creation. No forced workflow. No generic prompt-engineering lecture.
@@ -56,7 +56,7 @@ Pebl stays quiet until it has something useful to say.
 ## What Pebl gives you
 
 <p align="center">
-  <img src="assets/readme/features.jpg" alt="Pebl product capabilities" width="100%" />
+  <img src="assets/readme/retina-2x-png/features.png" alt="Pebl product capabilities" width="100%" />
 </p>
 
 The initial wedge is an **open-source, terminal-first AI Coach** for AI-native developers.
@@ -75,7 +75,7 @@ Every meaningful AI task becomes a compact retrospective:
 - a reusable project learning.
 
 <p align="center">
-  <img src="assets/readme/task-receipt.jpg" alt="AI Task Receipt" width="100%" />
+  <img src="assets/readme/retina-2x-png/task-receipt.png" alt="AI Task Receipt" width="100%" />
 </p>
 
 The default experience surfaces one precise recommendation rather than a wall of generic advice.
@@ -89,7 +89,7 @@ Pebl helps the user answer one practical question:
 > **Did I collaborate with AI better today?**
 
 <p align="center">
-  <img src="assets/readme/daily-report.jpg" alt="Daily AI Performance Report" width="100%" />
+  <img src="assets/readme/retina-2x-png/daily-report.png" alt="Daily AI Performance Report" width="100%" />
 </p>
 
 The report focuses on first-pass success, verification, clarity, avoidable effort, habits, and one recommendation for tomorrow.
@@ -101,7 +101,7 @@ The report focuses on first-pass success, verification, clarity, avoidable effor
 Pebl connects tasks, projects, prompts, receipts, habits, memories, and improvements into a longitudinal Human × AI performance graph.
 
 <p align="center">
-  <img src="assets/readme/work-graph.jpg" alt="AI Work Graph" width="100%" />
+  <img src="assets/readme/retina-2x-png/work-graph.png" alt="AI Work Graph" width="100%" />
 </p>
 
 Providers know what their model did. Pebl learns how the person, model, and project work together over time.
@@ -113,7 +113,7 @@ Providers know what their model did. Pebl learns how the person, model, and proj
 Useful interaction-level learnings become reusable project intelligence.
 
 <p align="center">
-  <img src="assets/readme/project-memory.jpg" alt="Project Memory" width="100%" />
+  <img src="assets/readme/retina-2x-png/project-memory.png" alt="Project Memory" width="100%" />
 </p>
 
 Project Memory has three confidence layers:
@@ -129,7 +129,7 @@ Project Memory has three confidence layers:
 Pebl is built to earn the trust of developers and security teams.
 
 <p align="center">
-  <img src="assets/readme/privacy-architecture.jpg" alt="Privacy-first architecture" width="100%" />
+  <img src="assets/readme/retina-2x-png/privacy-architecture.png" alt="Privacy-first architecture" width="100%" />
 </p>
 
 ### Local Only
@@ -150,7 +150,7 @@ Configurable retention, data residency, private endpoints, and future self-hoste
 Pebl is provider-independent.
 
 <p align="center">
-  <img src="assets/readme/providers.jpg" alt="Bring Your Own Intelligence" width="100%" />
+  <img src="assets/readme/retina-2x-png/providers.png" alt="Bring Your Own Intelligence" width="100%" />
 </p>
 
 Planned analysis options include:
@@ -171,7 +171,7 @@ Consumer subscriptions are supported only when the provider exposes an authorize
 ## Roadmap
 
 <p align="center">
-  <img src="assets/readme/roadmap.jpg" alt="Pebl roadmap" width="100%" />
+  <img src="assets/readme/retina-2x-png/roadmap.png" alt="Pebl roadmap" width="100%" />
 </p>
 
 | Stage | Focus |
@@ -211,5 +211,5 @@ Early contribution areas include AI CLI adapters, local event collection, prompt
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 <p align="center">
-  <img src="assets/readme/closing-banner.jpg" alt="Every prompt. A better you." width="100%" />
+  <img src="assets/readme/retina-2x-png/closing-banner.png" alt="Every prompt. A better you." width="100%" />
 </p>

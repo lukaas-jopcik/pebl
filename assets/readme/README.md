@@ -1,17 +1,22 @@
-# Pebl README assets
+# Pebl HQ Visual Assets
 
-These files are the approved visual system for the GitHub repository.
+This package avoids JPEG entirely.
 
-- `hero.jpg`
-- `workflow.jpg`
-- `features.jpg`
-- `task-receipt.jpg`
-- `daily-report.jpg`
-- `work-graph.jpg`
-- `project-memory.jpg`
-- `privacy-architecture.jpg`
-- `providers.jpg`
-- `roadmap.jpg`
-- `closing-banner.jpg`
+## Folders
 
-All assets use the canonical Pebl visual direction: calm navy, cream, violet, blue, restrained gradients, rounded UI, and clear typography.
+- `original-png/` — original generated PNG bytes, copied without recompression.
+- `retina-2x-png/` — 2× lossless PNG exports with mild sharpening for GitHub and Retina displays.
+
+## Recommended GitHub usage
+
+Use the 2× files in the repository:
+
+```html
+<img src="assets/readme/retina-2x-png/hero.png" width="100%" alt="Pebl" />
+```
+
+GitHub will display the image at the README width while retaining additional source pixels.
+
+## Important
+
+Upscaling cannot recreate detail that was absent in the generated source. The original PNG folder is the true source-of-record; the 2× folder mainly improves browser downsampling and perceived text sharpness.
