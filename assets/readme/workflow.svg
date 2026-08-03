@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1020"/><stop offset="1" stop-color="#10182C"/></linearGradient>
+  <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7C5CFF"/><stop offset=".5" stop-color="#4E9BFF"/><stop offset="1" stop-color="#22C7A1"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity=".28"/></filter>
+</defs>
+<rect width="1200" height="300" rx="28" fill="url(#bg)"/>
+<text x="60" y="55" fill="#F7F8FC" font-size="24" font-family="Inter,Arial" font-weight="700">How Pebl works</text>
+<text x="60" y="82" fill="#8D97AD" font-size="15" font-family="Inter,Arial">A quiet feedback loop that improves the next interaction.</text>
+<g font-family="Inter,Arial" text-anchor="middle">
+  <g transform="translate(70 112)" filter="url(#shadow)"><rect width="170" height="110" rx="20" fill="#151D31" stroke="#29344F"/><circle cx="85" cy="35" r="12" fill="#9A6CFF"/><path d="M62 77c4-19 42-19 46 0" fill="none" stroke="#9A6CFF" stroke-width="6" stroke-linecap="round"/><text x="85" y="100" fill="#F7F8FC" font-size="15">You prompt</text></g>
+  <g transform="translate(295 112)" filter="url(#shadow)"><rect width="170" height="110" rx="20" fill="#151D31" stroke="#2D5FB2"/><path d="M65 42l-15 14 15 14M105 42l15 14-15 14M91 34L78 78" fill="none" stroke="#4E9BFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text x="85" y="100" fill="#F7F8FC" font-size="15">AI executes</text></g>
+  <g transform="translate(520 112)" filter="url(#shadow)"><rect width="170" height="110" rx="20" fill="#151D31" stroke="#277E72"/><ellipse cx="85" cy="32" rx="17" ry="12" fill="#8F63F7"/><ellipse cx="63" cy="58" rx="20" ry="14" fill="#4E9BFF"/><ellipse cx="107" cy="58" rx="20" ry="14" fill="#22C7A1"/><text x="85" y="100" fill="#F7F8FC" font-size="15">Pebl observes</text></g>
+  <g transform="translate(745 112)" filter="url(#shadow)"><rect width="170" height="110" rx="20" fill="#151D31" stroke="#66449A"/><path d="M63 28h35l10 10v43H63z" fill="none" stroke="#A26CFF" stroke-width="5"/><path d="M72 49h27M72 61h27" stroke="#A26CFF" stroke-width="4" stroke-linecap="round"/><text x="85" y="100" fill="#F7F8FC" font-size="15">Receipt generated</text></g>
+  <g transform="translate(970 112)" filter="url(#shadow)"><rect width="170" height="110" rx="20" fill="#151D31" stroke="#277E72"/><path d="M55 69l23-22 16 13 27-29" fill="none" stroke="#22C7A1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text x="85" y="100" fill="#F7F8FC" font-size="15">You improve</text></g>
+</g>
+<g stroke="#64708A" stroke-width="3" fill="none"><path d="M240 167h42"/><path d="M465 167h42"/><path d="M690 167h42"/><path d="M915 167h42"/></g>
+<g fill="#64708A"><path d="M282 167l-10-6v12z"/><path d="M507 167l-10-6v12z"/><path d="M732 167l-10-6v12z"/><path d="M957 167l-10-6v12z"/></g>
+<path d="M1055 240v20H155v-20" fill="none" stroke="url(#grad)" stroke-width="3" stroke-dasharray="8 8"/>
+<text x="605" y="285" fill="#AAB3C6" font-size="14" font-family="Inter,Arial" text-anchor="middle">feedback loop</text>
+</svg>
