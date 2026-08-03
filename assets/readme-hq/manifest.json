@@ -1,0 +1,149 @@
+{
+  "format": "lossless PNG",
+  "assets": {
+    "workflow.png": {
+      "source": "how_pebl_works_from_prompt_to_progress.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "0bb0b1d1bde6778a86e837a2ca4aa7d7850cc858b0637e1fa1ef9b2fad487fc3"
+    },
+    "task-receipt.png": {
+      "source": "a_clean_dark_themed_ui_mockup_dashboard_screensh.png",
+      "original_dimensions": [
+        1536,
+        1024
+      ],
+      "retina_dimensions": [
+        3072,
+        2048
+      ],
+      "sha256_original": "83b1b98f714859b305cd4589a63d3b8f2b5459bf956ee99c4318588632ac1907"
+    },
+    "work-graph.png": {
+      "source": "imagegen.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "6b8ca2c0c0787540e04ff32e1a5ca3a2a625a9553ddd54697f2e600cb59d089e"
+    },
+    "privacy-architecture.png": {
+      "source": "privacy_first_architecture_at_a_glance.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "28076154353ca23cf14725fd6aff72b347f3a8b42c2042f7da645c5f8482e263"
+    },
+    "roadmap.png": {
+      "source": "pebl_roadmap_building_step_by_step.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "e69af9342089fcb86e4b1bf52d9fe88b2d091f9494180d5b72dc89ac32c967f3"
+    },
+    "features.png": {
+      "source": "what_pebl_gives_you_feature_showcase.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "b1361b0b458e9e0bab2a9ecbd368d1fd393c306655c7f5bf722fea9db08b1e7b"
+    },
+    "project-memory.png": {
+      "source": "project_memory_from_facts_to_rules.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "73b855f4f005df352247d91787d6627b3914ef3484c1cf22a110fe846a3718e3"
+    },
+    "daily-report.png": {
+      "source": "daily_ai_performance_dashboard.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "e50e8e5fd81eeaac8208ae5b574f354abf6149a20fe96a85c8b97e6774edabe3"
+    },
+    "providers.png": {
+      "source": "pebl_intelligence_hub_diagram.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "cc798633b95b62f54daa4d376e7807f1a3f3c2c23010e2a41dbd9df12a5bd025"
+    },
+    "closing-banner.png": {
+      "source": "pebl_every_prompt_a_better_you.png",
+      "original_dimensions": [
+        1672,
+        941
+      ],
+      "retina_dimensions": [
+        3344,
+        1882
+      ],
+      "sha256_original": "87ad8365f4f17d10b8a748fa2ff8121f7dea9dda8d37eaa7db83adb3dbc9d6ff"
+    },
+    "hero.png": {
+      "source": "a_dark_polished_marketing_hero_banner_ui_landin.png",
+      "original_dimensions": [
+        1536,
+        1024
+      ],
+      "retina_dimensions": [
+        3072,
+        2048
+      ],
+      "sha256_original": "ce410d01fd00b06a3aa54fc03b83fa48f1056392bfa6a33d17b9aa2e1ea45bf2"
+    },
+    "brand-board.png": {
+      "source": "ChatGPT Image Aug 3, 2026, 10_45_07 AM.png",
+      "original_dimensions": [
+        1536,
+        1024
+      ],
+      "retina_dimensions": [
+        3072,
+        2048
+      ],
+      "sha256_original": "c722b9bdbfbf4be5b2c4951bc0e1268d04a681f12423d2cdc684aded09b71cea"
+    }
+  }
+}
