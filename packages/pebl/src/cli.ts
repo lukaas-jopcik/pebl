@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import { runClaudeCodeHook } from './hooks/claude-code-entrypoint.js';
+import { runCodexHook } from './hooks/codex-entrypoint.js';
 import { writeContinueResponse } from './hooks/stdin.js';
 
 const program = new Command();
@@ -17,8 +18,11 @@ program
       await runClaudeCodeHook();
       return;
     }
-    // Codex support lands in Phase 3. Never break the agent's turn over an
-    // agent we don't handle yet.
+    if (agent === 'codex') {
+      await runCodexHook();
+      return;
+    }
+    // Never break the agent's turn over an agent we don't handle.
     process.stderr.write(`pebl: no handler for agent "${agent}" yet\n`);
     writeContinueResponse();
   });
