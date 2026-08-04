@@ -1,6 +1,6 @@
 {
   "name": "bepebl",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Local-only AI Task Receipts for Claude Code and Codex CLI, backed by evidence, not guesses.",
   "license": "Apache-2.0",
   "keywords": [
