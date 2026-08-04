@@ -3,10 +3,12 @@ import { describe, expect, it } from 'vitest';
 import { runClaudeCodeHook } from '../src/hooks/claude-code-entrypoint.js';
 import { readEvents } from '../src/events/store.js';
 import { resolveProjectId } from '../src/paths.js';
+import { MANAGED_EVENTS, registerHooks, registeredEvents, unregisterHooks } from '../src/adapters/claude-code/hooks.js';
 import { loadFixture } from './helpers/fixtures.js';
-import { useTempPeblHome } from './helpers/tmp-home.js';
+import { useTempPeblHome, useTempClaudeConfigDir } from './helpers/tmp-home.js';
 
 useTempPeblHome();
+useTempClaudeConfigDir();
 
 function stdinFrom(payload: unknown): Readable {
   return Readable.from([JSON.stringify(payload)]);
@@ -91,5 +93,23 @@ describe('runClaudeCodeHook end-to-end', () => {
 
     expect(stdout.text()).toBe('{"continue":true}');
     expect(stderr.text()).toMatch(/ignoring unrecognized/);
+  });
+
+  it('self-heals global hook registration if another process wiped it mid-session', async () => {
+    const payload = loadFixture('claude-code/session-start');
+    const cwd = '/tmp/example-project';
+
+    // Simulate a prior `pebl setup --global`, then a concurrent process
+    // flushing a stale settings snapshot that drops our entries.
+    registerHooks('global', cwd);
+    unregisterHooks('global', cwd);
+    expect(registeredEvents('global', cwd)).toHaveLength(0);
+
+    const stdout = captureStdout();
+    const stderr = captureStdout();
+    await runClaudeCodeHook(stdinFrom(payload), stdout.stream, stderr.stream);
+
+    expect(stdout.text()).toBe('{"continue":true}');
+    expect(registeredEvents('global', cwd).sort()).toEqual([...MANAGED_EVENTS].sort());
   });
 });

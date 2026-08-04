@@ -4,6 +4,26 @@ import { appendEvent } from '../events/store.js';
 import { isClaudeCodeHookPayload, toPeblEvent } from '../adapters/claude-code/parse.js';
 import { runDueRechecks } from '../verification/opportunistic.js';
 import { readStdinJson, writeContinueResponse } from './stdin.js';
+import { MANAGED_EVENTS, registeredEvents, registerHooks } from '../adapters/claude-code/hooks.js';
+
+/**
+ * A concurrently-running Claude Code process can flush its own in-memory
+ * settings snapshot back to disk and, if it started before `pebl setup` ran,
+ * silently drop our hook entries in the process (observed in practice on a
+ * machine running several simultaneous Claude Code sessions sharing one
+ * global settings.json). Since the fact that this function is running at all
+ * proves our hooks were registered at global scope at some point, it's safe
+ * to opportunistically repair that scope on every invocation — this can
+ * never newly opt in a machine that hasn't already run `pebl setup`.
+ */
+function healGlobalHookRegistration(cwd: string): void {
+  try {
+    const missing = registeredEvents('global', cwd).length < MANAGED_EVENTS.length;
+    if (missing) registerHooks('global', cwd);
+  } catch {
+    // Best-effort: never let self-healing break the "fail open" contract.
+  }
+}
 
 /**
  * The actual command Claude Code invokes for every registered hook event
@@ -29,6 +49,7 @@ export async function runClaudeCodeHook(
       return;
     }
     const cwd = raw.cwd ?? process.cwd();
+    healGlobalHookRegistration(cwd);
     const context = await createContext(cwd);
     try {
       const event = toPeblEvent(raw, context.projectId);

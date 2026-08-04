@@ -28,3 +28,32 @@ export function useTempPeblHome(): void {
     }
   });
 }
+
+/**
+ * Points CLAUDE_CONFIG_DIR at a fresh temp directory for the duration of one
+ * test file, and cleans it up afterwards. Anything that registers or repairs
+ * global Claude Code hooks (e.g. the self-healing check in
+ * claude-code-entrypoint.ts) must run under this — nothing should ever read
+ * or write a real user's ~/.claude/settings.json (or whatever
+ * CLAUDE_CONFIG_DIR happens to point at in the dev/CI environment running
+ * these tests).
+ */
+export function useTempClaudeConfigDir(): void {
+  let dir: string;
+  let previous: string | undefined;
+
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'pebl-test-claude-config-'));
+    previous = process.env.CLAUDE_CONFIG_DIR;
+    process.env.CLAUDE_CONFIG_DIR = dir;
+  });
+
+  afterEach(() => {
+    rmSync(dir, { recursive: true, force: true });
+    if (previous === undefined) {
+      delete process.env.CLAUDE_CONFIG_DIR;
+    } else {
+      process.env.CLAUDE_CONFIG_DIR = previous;
+    }
+  });
+}
